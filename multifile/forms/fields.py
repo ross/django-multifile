@@ -1,8 +1,15 @@
-from django.forms import Field, 
+
+
+from django.core import validators
+from django.core.exceptions import ValidationError
+
+from django.forms import Field
 
 from widgets import MultiFileInput
 
 class MultiFileField(Field):
+    """A multiple-valued file input field."""
+    
     widget = MultiFileInput
     default_error_messages = {
         'invalid': _(u"No file was submitted. Check the encoding type on the form."),
@@ -39,4 +46,4 @@ class MultiFileField(Field):
     def clean(self, data, initial=None):
         if not data and initial:
             return initial
-        return super(FileField, self).clean(data)
+        return super(MultiFileField, self).clean(data)

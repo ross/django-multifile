@@ -1,11 +1,7 @@
 from django import forms
 
-class MultiFileInput(forms.widgets.Input):
-    """A multiple-file FileInput widget."""
-
-    input_type = 'file'
-
-    needs_multipart_form = True
+class MultiFileInput(forms.widgets.FileInput):
+    """A multiple-file file input widget."""
 
     class Media:
         js = ('js/jquery.js', 'js/jquery.multifile.js', )
@@ -24,5 +20,4 @@ class MultiFileInput(forms.widgets.Input):
 
     def value_from_datadict(self, data, files, name):
         """Return a list of the uploaded files."""
-
         return files.getlist(name)
