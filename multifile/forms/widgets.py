@@ -20,4 +20,7 @@ class MultiFileInput(forms.widgets.FileInput):
 
     def value_from_datadict(self, data, files, name):
         """Return a list of the uploaded files."""
-        return files.getlist(name)
+        if hasattr(files, 'getlist'):
+            return files.getlist(name)
+        else:
+            return []
